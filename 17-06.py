@@ -3,10 +3,9 @@ lista_trabajador = []
 def menu_principal():
     opciones = {
         '1': ('Registrar trabajador', reg_trabajador),
-        '2': ('Listar los todos los trabajadores', list_trabajador),
+        '2': ('Listar todos los trabajadores', lis_trabajador),
         '3': ('Imprimir planilla de sueldos', imp_trabajador),
-        '4': ('Salir del Programa', salir)
-    }
+        '4': ('Salir del Programa', salir)    }
 
     generar_menu(opciones, '4')
 
@@ -34,16 +33,37 @@ def ejecutar_opcion(opcion, opciones):
 
 
 def reg_trabajador():
-    print('Has elegido la opción 1')
+    system("cls")
+    nombres = input("Ingrese  nombre  y Apellido del trabajador ")
+    cargo   = input("Ingrese el cargo del trabajador ")
+    sueldo_bruto = int(input("Ingrese el sueldo bruto del Trabajador "))
+    desc_salud =  int(round(sueldo_bruto *  7/100,0))
+    desc_afp =  int(round(sueldo_bruto*12/100,0))
+    liquido = sueldo_bruto - desc_salud - desc_afp
+    lista_trabajador.append({
+                    "nombres": nombres,
+                    "cargo": cargo,
+                    "sueldo_bruto": sueldo_bruto,
+                    "desc_salud": desc_salud,
+                    "desc_afp": desc_afp,
+                    "liquido": liquido,
+                })
+    print(lista_trabajador)
     input()
+    return 
 
-def list_trabajador():
-    print('Has elegido la opción 2')
+
+def lis_trabajador():
+    system("cls")
+    print(f'Nombres\t       Cargo\t Sueldo bruto\t Descuento Salud\t Descuento AFP\t Sueldo Liquido\t')
+    for trabajador in lista_trabajador:
+         print(f'{trabajador['nombres']}\t       {trabajador['cargo']}\t    {trabajador['sueldo_bruto']}\t          {trabajador['desc_salud']}\t        {trabajador['desc_afp']}\t      {trabajador['liquido']}\t')
     input()
+    return
 
 def imp_trabajador():
     print('Has elegido la opción 3')
-    input()
+
 
 def salir():
     print('Saliendo')
